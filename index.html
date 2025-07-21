@@ -1,0 +1,576 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title data-key="calcTitle">Calculadora de ROI VelocityGain</title>
+    <!-- Inclui Tailwind CSS para estilização rápida e responsiva -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+    <style>
+        body {
+            font-family: 'Inter', sans-serif;
+            background-color: #f8fafc; /* Fundo mais claro */
+            color: #333333; /* Cor de texto padrão */
+        }
+        input[type="number"]::-webkit-inner-spin-button,
+        input[type="number"]::-webkit-outer-spin-button {
+            -webkit-appearance: none;
+            margin: 0;
+        }
+        input[type="number"] {
+            -moz-appearance: textfield;
+        }
+        /* Estilos para impressão */
+        @media print {
+            body {
+                background-color: #fff;
+                margin: 0;
+                padding: 0;
+                font-size: 10pt;
+            }
+            .no-print {
+                display: none !important;
+            }
+            .page-break {
+                page-break-after: always;
+            }
+            .container {
+                width: 100%;
+                margin: 0;
+                padding: 0;
+                box-shadow: none;
+                border: none;
+            }
+            h1, h2, h3 {
+                color: #1e88e5 !important; /* Cores mais escuras para impressão */
+            }
+            .grid {
+                display: block;
+            }
+            .grid > div {
+                margin-bottom: 10px;
+            }
+            input {
+                border: none !important;
+                background-color: transparent !important;
+                padding: 0 !important;
+                box-shadow: none !important;
+            }
+            label {
+                font-weight: bold;
+            }
+        }
+    </style>
+</head>
+<body class="p-4 sm:p-6 lg:p-8 flex items-center justify-center min-h-screen">
+    <div class="bg-white p-6 sm:p-8 rounded-xl shadow-2xl w-full max-w-5xl border border-gray-100 container">
+        <!-- Header com Branding e Botões de Idioma -->
+        <div class="flex flex-col sm:flex-row justify-between items-center mb-8">
+            <div class="flex items-center space-x-3 mb-4 sm:mb-0">
+                <!-- Logo AuthPro no canto superior esquerdo -->
+                <img src="files/uploaded:ChatGPT Image 21 de jul. de 2025, 08_00_23.jpg-737fc0cf-b0a6-411d-b661-5d8d67051c95" alt="Logo AuthPro" class="h-8 opacity-90">
+                <span class="text-xl sm:text-2xl font-extrabold text-[#1e88e5]">
+                    VT Vinicius Teixeira
+                </span>
+            </div>
+            <div class="flex space-x-2 no-print">
+                <button class="lang-btn px-4 py-2 text-sm rounded-lg bg-[#e3f2fd] text-[#1e88e5] font-semibold hover:bg-blue-200 transition duration-200" data-lang="pt">PT</button>
+                <button class="lang-btn px-4 py-2 text-sm rounded-lg bg-[#e3f2fd] text-[#1e88e5] font-semibold hover:bg-blue-200 transition duration-200" data-lang="en">EN</button>
+                <button class="lang-btn px-4 py-2 text-sm rounded-lg bg-[#e3f2fd] text-[#1e88e5] font-semibold hover:bg-blue-200 transition duration-200" data-lang="es">ES</button>
+            </div>
+        </div>
+
+        <h1 class="text-3xl sm:text-4xl font-bold text-center text-[#1e88e5] mb-4" data-key="mainTitle">Calculadora de ROI VelocityGain</h1>
+        <p class="text-center text-gray-700 text-lg mb-6" data-key="pageDescription">
+            Descubra o potencial de otimização das suas operações! Esta calculadora interativa foi desenvolvida para bancos emissores que buscam maximizar a performance de autenticação, autorização e prevenção à fraude. Veja claramente como pequenas melhorias se traduzem em ganhos financeiros substanciais e um retorno sobre investimento acelerado.
+        </p>
+        <p class="text-center text-gray-600 text-md mb-8" data-key="subtitle">Preencha os campos para estimar o retorno do seu investimento em otimização.</p>
+
+        <!-- Campos de Dados do Cliente -->
+        <div class="bg-[#e3f2fd] p-6 rounded-xl border border-blue-200 mb-8 shadow-inner">
+            <h2 class="text-xl font-semibold text-[#1e88e5] mb-4" data-key="clientDataTitle">Dados do Cliente</h2>
+            <div class="grid grid-cols-1 md:grid-cols-3 gap-6">
+                <div>
+                    <label for="clientName" class="block text-sm font-medium text-gray-700" data-key="clientNameLabel">Nome do Cliente</label>
+                    <input type="text" id="clientName" class="mt-1 block w-full p-3 border border-blue-300 rounded-lg shadow-sm focus:ring-[#1e88e5] focus:border-[#1e88e5] sm:text-base">
+                </div>
+                <div>
+                    <label for="country" class="block text-sm font-medium text-gray-700" data-key="countryLabel">País</label>
+                    <input type="text" id="country" class="mt-1 block w-full p-3 border border-blue-300 rounded-lg shadow-sm focus:ring-[#1e88e5] focus:border-[#1e88e5] sm:text-base">
+                </div>
+                <div>
+                    <label for="contact" class="block text-sm font-medium text-gray-700" data-key="contactLabel">Contato</label>
+                    <input type="text" id="contact" class="mt-1 block w-full p-3 border border-blue-300 rounded-lg shadow-sm focus:ring-[#1e88e5] focus:border-[#1e88e5] sm:text-base">
+                </div>
+            </div>
+        </div>
+
+        <div class="grid grid-cols-1 lg:grid-cols-2 gap-8 mb-8">
+            <!-- Seção de Entradas Atuais -->
+            <div class="bg-white p-6 rounded-xl border border-gray-200 shadow-md">
+                <h2 class="text-xl font-semibold text-[#1e88e5] mb-4" data-key="currentInputsTitle">Entradas Atuais</h2>
+                <div class="space-y-4">
+                    <div>
+                        <label for="volumeTransacoes" class="block text-sm font-medium text-gray-700" data-key="volumeTransacoesLabel">Volume de Transações/Mês</label>
+                        <input type="number" id="volumeTransacoes" value="100000" class="mt-1 block w-full p-3 border border-blue-300 rounded-lg shadow-sm focus:ring-[#1e88e5] focus:border-[#1e88e5] sm:text-base">
+                    </div>
+                    <div>
+                        <label for="autenticacaoSucessoAtual" class="block text-sm font-medium text-gray-700" data-key="authSuccessCurrentLabel">Taxa de Autenticação Bem-Sucedida (ASR) (%) - Atual</label>
+                        <input type="number" id="autenticacaoSucessoAtual" value="60" step="0.01" class="mt-1 block w-full p-3 border border-blue-300 rounded-lg shadow-sm focus:ring-[#1e88e5] focus:border-[#1e88e5] sm:text-base">
+                    </div>
+                    <div>
+                        <label for="challengeRateAtual" class="block text-sm font-medium text-gray-700" data-key="challengeRateCurrentLabel">Challenge Rate (%) - Atual</label>
+                        <input type="number" id="challengeRateAtual" value="70" step="0.01" class="mt-1 block w-full p-3 border border-blue-300 rounded-lg shadow-sm focus:ring-[#1e88e5] focus:border-[#1e88e5] sm:text-base">
+                    </div>
+                    <div>
+                        <label for="autorizacaoAprovadaAtual" class="block text-sm font-medium text-gray-700" data-key="authApprovedCurrentLabel">Taxa de Autorização Aprovada (%) - Atual</label>
+                        <input type="number" id="autorizacaoAprovadaAtual" value="85" step="0.01" class="mt-1 block w-full p-3 border border-blue-300 rounded-lg shadow-sm focus:ring-[#1e88e5] focus:border-[#1e88e5] sm:text-base">
+                    </div>
+                    <div>
+                        <label for="fraudeAtual" class="block text-sm font-medium text-gray-700" data-key="fraudCurrentLabel">Taxa de Fraude (bps) - Atual</label>
+                        <input type="number" id="fraudeAtual" value="30" step="0.01" class="mt-1 block w-full p-3 border border-blue-300 rounded-lg shadow-sm focus:ring-[#1e88e5] focus:border-[#1e88e5] sm:text-base">
+                    </div>
+                    <div>
+                        <label for="disputasAtual" class="block text-sm font-medium text-gray-700" data-key="disputasCurrentLabel">Taxa de Disputas/Chargebacks (%) - Atual</label>
+                        <input type="number" id="disputasAtual" value="0.2" step="0.01" class="mt-1 block w-full p-3 border border-blue-300 rounded-lg shadow-sm focus:ring-[#1e88e5] focus:border-[#1e88e5] sm:text-base">
+                    </div>
+                </div>
+            </div>
+
+            <!-- Seção de Entradas Projetadas -->
+            <div class="bg-white p-6 rounded-xl border border-gray-200 shadow-md">
+                <h2 class="text-xl font-semibold text-[#1e88e5] mb-4" data-key="projectedInputsTitle">Entradas Projetadas (Pós-Otimização)</h2>
+                <div class="space-y-4">
+                    <div>
+                        <label for="autenticacaoSucessoNova" class="block text-sm font-medium text-gray-700" data-key="authSuccessNewLabel">Taxa de Autenticação Bem-Sucedida (ASR) (%) - Nova</label>
+                        <input type="number" id="autenticacaoSucessoNova" value="65" step="0.01" class="mt-1 block w-full p-3 border border-blue-300 rounded-lg shadow-sm focus:ring-[#1e88e5] focus:border-[#1e88e5] sm:text-base">
+                    </div>
+                    <div>
+                        <label for="challengeRateNova" class="block text-sm font-medium text-gray-700" data-key="challengeRateNewLabel">Challenge Rate (%) - Nova</label>
+                        <input type="number" id="challengeRateNova" value="60" step="0.01" class="mt-1 block w-full p-3 border border-blue-300 rounded-lg shadow-sm focus:ring-[#1e88e5] focus:border-[#1e88e5] sm:text-base">
+                    </div>
+                    <div>
+                        <label for="autorizacaoAprovadaNova" class="block text-sm font-medium text-gray-700" data-key="authApprovedNewLabel">Taxa de Autorização Aprovada (%) - Nova</label>
+                        <input type="number" id="autorizacaoAprovadaNova" value="88" step="0.01" class="mt-1 block w-full p-3 border border-blue-300 rounded-lg shadow-sm focus:ring-[#1e88e5] focus:border-[#1e88e5] sm:text-base">
+                    </div>
+                    <div>
+                        <label for="fraudeNova" class="block text-sm font-medium text-gray-700" data-key="fraudNewLabel">Taxa de Fraude (bps) - Nova</label>
+                        <input type="number" id="fraudeNova" value="20" step="0.01" class="mt-1 block w-full p-3 border border-blue-300 rounded-lg shadow-sm focus:ring-[#1e88e5] focus:border-[#1e88e5] sm:text-base">
+                    </div>
+                    <div>
+                        <label for="disputasNova" class="block text-sm font-medium text-gray-700" data-key="disputasNewLabel">Taxa de Disputas/Chargebacks (%) - Nova</label>
+                        <input type="number" id="disputasNova" value="0.1" step="0.01" class="mt-1 block w-full p-3 border border-blue-300 rounded-lg shadow-sm focus:ring-[#1e88e5] focus:border-[#1e88e5] sm:text-base">
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="bg-white p-6 rounded-xl border border-gray-200 shadow-md mb-8">
+            <h2 class="text-xl font-semibold text-[#1e88e5] mb-4" data-key="financialValuesTitle">Valores Financeiros</h2>
+            <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+                <div>
+                    <label for="receitaMediaTransacao" class="block text-sm font-medium text-gray-700" data-key="avgRevenuePerTxLabel">Receita Média por Transação Aprovada (R$)</label>
+                    <input type="number" id="receitaMediaTransacao" value="1.50" step="0.01" class="mt-1 block w-full p-3 border border-blue-300 rounded-lg shadow-sm focus:ring-[#1e88e5] focus:border-[#1e88e5] sm:text-base">
+                </div>
+                <div>
+                    <label for="custoMedioFraudeDisputa" class="block text-sm font-medium text-gray-700" data-key="avgFraudDisputeCostLabel">Custo Médio por Fraude ou Disputa (R$)</label>
+                    <input type="number" id="custoMedioFraudeDisputa" value="50.00" step="0.01" class="mt-1 block w-full p-3 border border-blue-300 rounded-lg shadow-sm focus:ring-[#1e88e5] focus:border-[#1e88e5] sm:text-base">
+                </div>
+                <div>
+                    <label for="custoMedioChallenge" class="block text-sm font-medium text-gray-700" data-key="avgChallengeCostLabel">Custo Médio por Challenge (R$)</label>
+                    <input type="number" id="custoMedioChallenge" value="0.50" step="0.01" class="mt-1 block w-full p-3 border border-blue-300 rounded-lg shadow-sm focus:ring-[#1e88e5] focus:border-[#1e88e5] sm:text-base">
+                </div>
+                <div>
+                    <label for="investimentoEstimado" class="block text-sm font-medium text-gray-700" data-key="estimatedInvestmentLabel">Investimento Estimado no Serviço (R$/Ano)</label>
+                    <input type="number" id="investimentoEstimado" value="500000" step="0.01" class="mt-1 block w-full p-3 border border-blue-300 rounded-lg shadow-sm focus:ring-[#1e88e5] focus:border-[#1e88e5] sm:text-base">
+                </div>
+                <div>
+                    <label for="ticketMedio" class="block text-sm font-medium text-gray-700" data-key="avgTicketLabel">Ticket Médio (R$)</label>
+                    <input type="number" id="ticketMedio" value="100.00" step="0.01" class="mt-1 block w-full p-3 border border-blue-300 rounded-lg shadow-sm focus:ring-[#1e88e5] focus:border-[#1e88e5] sm:text-base">
+                </div>
+                <div>
+                    <label for="interchangeFeePercentual" class="block text-sm font-medium text-gray-700" data-key="interchangeFeePercentLabel">Interchange Fee (%) do Ticket Médio</label>
+                    <input type="number" id="interchangeFeePercentual" value="0.80" step="0.01" class="mt-1 block w-full p-3 border border-blue-300 rounded-lg shadow-sm focus:ring-[#1e88e5] focus:border-[#1e88e5] sm:text-base">
+                </div>
+                <div>
+                    <label for="transacoesElegiveisInterchange" class="block text-sm font-medium text-gray-700" data-key="eligibleTxInterchangeLabel">% de Transações Elegíveis para Interchange</label>
+                    <input type="number" id="transacoesElegiveisInterchange" value="95" step="0.01" class="mt-1 block w-full p-3 border border-blue-300 rounded-lg shadow-sm focus:ring-[#1e88e5] focus:border-[#1e88e5] sm:text-base">
+                </div>
+            </div>
+        </div>
+
+        <button id="calculateBtn" class="w-full bg-[#1e88e5] hover:bg-[#1565c0] text-white font-bold py-4 px-6 rounded-lg shadow-lg transition duration-300 ease-in-out transform hover:scale-105 focus:outline-none focus:ring-2 focus:ring-[#1e88e5] focus:ring-opacity-50 no-print text-lg">
+            <span data-key="calculateButton">Calcular ROI</span>
+        </button>
+
+        <!-- Seção de Saídas -->
+        <div id="results" class="mt-8 bg-[#e3f2fd] p-6 rounded-xl border border-blue-200 shadow-inner hidden">
+            <h2 class="text-xl sm:text-2xl font-bold text-[#1e88e5] mb-4 text-center" data-key="resultsTitle">Resultados da Otimização</h2>
+            <div class="grid grid-cols-1 md:grid-cols-2 gap-4 text-gray-800">
+                <div class="p-4 bg-white rounded-lg shadow-sm flex justify-between items-center border border-gray-100">
+                    <span class="font-semibold text-gray-700" data-key="totalGainAnnualLabel">Ganho Total Estimado (Anual):</span>
+                    <span id="ganhoTotalAnual" class="text-xl font-bold text-green-700"></span>
+                </div>
+                <div class="p-4 bg-white rounded-lg shadow-sm flex justify-between items-center border border-gray-100">
+                    <span class="font-semibold" data-key="roiTotalLabel">ROI Total:</span>
+                    <span id="roiTotal" class="text-xl font-bold text-green-700"></span>
+                    <span class="text-sm text-gray-500 ml-2" data-key="roiExplanation" title="Retorno Líquido sobre o Investimento: (Ganhos - Investimento) / Investimento * 100">(?)</span>
+                </div>
+                <div class="p-4 bg-white rounded-lg shadow-sm flex justify-between items-center border border-gray-100">
+                    <span class="font-semibold" data-key="paybackLabel">Payback:</span>
+                    <span id="payback" class="text-xl font-bold text-green-700"></span>
+                </div>
+                <div class="p-4 bg-white rounded-lg shadow-sm flex justify-between items-center border border-gray-100">
+                    <span class="font-semibold" data-key="interchangeRevenueAnnualLabel">Receita Incremental por Interchange Fee (Anual):</span>
+                    <span id="receitaInterchangeAnual" class="text-xl font-bold text-green-700"></span>
+                </div>
+                <div class="p-4 bg-white rounded-lg shadow-sm flex justify-between items-center border border-gray-100">
+                    <span class="font-semibold" data-key="operationalSavingsAnnualLabel">Economia Operacional Anual:</span>
+                    <span id="economiaOperacionalAnual" class="text-xl font-bold text-green-700"></span>
+                </div>
+            </div>
+
+            <h3 class="text-lg font-semibold text-[#1e88e5] mt-8 mb-4 text-center" data-key="metricsComparisonTitle">Comparativo de Métricas (Antes vs. Depois)</h3>
+            <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4 text-gray-700">
+                <div class="p-4 bg-white rounded-lg shadow-sm text-center border border-gray-100">
+                    <p class="font-semibold" data-key="authApprovedMetricLabel">Autorização Aprovada</p>
+                    <p class="text-lg"><span id="autorizacaoAprovadaAntes" class="font-medium"></span>% <span class="text-gray-500">→</span> <span id="autorizacaoAprovadaDepois" class="font-medium"></span>%</p>
+                </div>
+                <div class="p-4 bg-white rounded-lg shadow-sm text-center border border-gray-100">
+                    <p class="font-semibold" data-key="fraudMetricLabel">Fraude</p>
+                    <p class="text-lg"><span id="fraudeAntes" class="font-medium"></span>bps <span class="text-gray-500">→</span> <span id="fraudeDepois" class="font-medium"></span>bps</p>
+                </div>
+                <div class="p-4 bg-white rounded-lg shadow-sm text-center border border-gray-100">
+                    <p class="font-semibold" data-key="challengeRateMetricLabel">Challenge Rate</p>
+                    <p class="text-lg"><span id="challengeRateAntes" class="font-medium"></span>% <span class="text-gray-500">→</span> <span id="challengeRateDepois" class="font-medium"></span>%</p>
+                </div>
+                <div class="p-4 bg-white rounded-lg shadow-sm text-center border border-gray-100">
+                    <p class="font-semibold" data-key="disputesMetricLabel">Disputas/Chargebacks</p>
+                    <p class="text-lg"><span id="disputasAntes" class="font-medium"></span>% <span class="text-gray-500">→</span> <span id="disputasDepois" class="font-medium"></span>%</p>
+                </div>
+            </div>
+        </div>
+
+        <button id="printBtn" class="w-full mt-8 bg-[#0d47a1] hover:bg-[#002171] text-white font-bold py-4 px-6 rounded-lg shadow-lg transition duration-300 ease-in-out transform hover:scale-105 focus:outline-none focus:ring-2 focus:ring-[#0d47a1] focus:ring-opacity-50 no-print text-lg">
+            <span data-key="downloadButton">Download</span>
+        </button>
+
+        <!-- Copyright e Logo no Rodapé -->
+        <div class="flex flex-col sm:flex-row justify-center items-center text-gray-500 text-sm mt-8 space-y-2 sm:space-y-0 sm:space-x-4">
+            <span>&copy; <span id="currentYear"></span> VT Vinicius Teixeira</span>
+            <!-- Sua logo pessoal VT Vinicius Teixeira adicionada aqui -->
+            <img src="files/uploaded:1753094321792.jpeg-005321cb-63f4-4b48-ad58-14f5aee5002b" alt="Logo VT Vinicius Teixeira" class="h-10 opacity-90">
+        </div>
+    </div>
+
+    <script>
+        // Objeto de strings para internacionalização
+        const translations = {
+            pt: {
+                calcTitle: "Calculadora de ROI VelocityGain",
+                mainTitle: "Calculadora de ROI VelocityGain",
+                pageDescription: "Descubra o potencial de otimização das suas operações! Esta calculadora interativa foi desenvolvida para bancos emissores que buscam maximizar a performance de autenticação, autorização e prevenção à fraude. Veja claramente como pequenas melhorias se traduzem em ganhos financeiros substanciais e um retorno sobre investimento acelerado.",
+                subtitle: "Preencha os campos para estimar o retorno do seu investimento em otimização.",
+                clientDataTitle: "Dados do Cliente",
+                clientNameLabel: "Nome do Cliente",
+                countryLabel: "País",
+                contactLabel: "Contato",
+                currentInputsTitle: "Entradas Atuais",
+                volumeTransacoesLabel: "Volume de Transações/Mês",
+                authSuccessCurrentLabel: "Taxa de Autenticação Bem-Sucedida (ASR) (%) - Atual",
+                challengeRateCurrentLabel: "Challenge Rate (%) - Atual",
+                authApprovedCurrentLabel: "Taxa de Autorização Aprovada (%) - Atual",
+                fraudCurrentLabel: "Taxa de Fraude (bps) - Atual",
+                disputasCurrentLabel: "Taxa de Disputas/Chargebacks (%) - Atual",
+                projectedInputsTitle: "Entradas Projetadas (Pós-Otimização)",
+                authSuccessNewLabel: "Taxa de Autenticação Bem-Sucedida (ASR) (%) - Nova",
+                challengeRateNewLabel: "Challenge Rate (%) - Nova",
+                authApprovedNewLabel: "Tasa de Autorização Aprovada (%) - Nova",
+                fraudNewLabel: "Tasa de Fraude (bps) - Nova",
+                disputasNewLabel: "Tasa de Disputas/Chargebacks (%) - Nova",
+                financialValuesTitle: "Valores Financeiros",
+                avgRevenuePerTxLabel: "Receita Média por Transação Aprovada (R$)",
+                avgFraudDisputeCostLabel: "Custo Médio por Fraude ou Disputa (R$)",
+                avgChallengeCostLabel: "Custo Médio por Challenge (R$)",
+                estimatedInvestmentLabel: "Investimento Estimado no Serviço (R$/Ano)",
+                avgTicketLabel: "Ticket Médio (R$)",
+                interchangeFeePercentLabel: "Interchange Fee (%) do Ticket Médio",
+                eligibleTxInterchangeLabel: "% de Transações Elegíveis para Interchange",
+                calculateButton: "Calcular ROI",
+                resultsTitle: "Resultados da Otimização",
+                totalGainAnnualLabel: "Ganho Total Estimado (Anual):",
+                roiTotalLabel: "ROI Total:",
+                roiExplanation: "Retorno Líquido sobre o Investimento: (Ganhos - Investimento) / Investimento * 100",
+                paybackLabel: "Payback:",
+                interchangeRevenueAnnualLabel: "Receita Incremental por Interchange Fee (Anual):",
+                operationalSavingsAnnualLabel: "Economia Operacional Anual:",
+                metricsComparisonTitle: "Comparativo de Métricas (Antes vs. Depois)",
+                authApprovedMetricLabel: "Autorização Aprovada",
+                fraudMetricLabel: "Fraude",
+                challengeRateMetricLabel: "Challenge Rate",
+                disputasMetricLabel: "Disputas/Chargebacks",
+                downloadButton: "Download",
+                alertMessage: "Por favor, preencha todos os campos com valores numéricos válidos."
+            },
+            en: {
+                calcTitle: "VelocityGain ROI Calculator",
+                mainTitle: "VelocityGain ROI Calculator",
+                pageDescription: "Unlock your operations' optimization potential! This interactive calculator is designed for issuing banks seeking to maximize authentication, authorization, and fraud prevention performance. Clearly see how small improvements translate into substantial financial gains and accelerated return on investment.",
+                subtitle: "Fill in the fields to estimate the return on your optimization investment.",
+                clientDataTitle: "Client Data",
+                clientNameLabel: "Client Name",
+                countryLabel: "Country",
+                contactLabel: "Contact",
+                currentInputsTitle: "Current Inputs",
+                volumeTransacoesLabel: "Monthly Transaction Volume",
+                authSuccessCurrentLabel: "Successful Authentication Rate (ASR) (%) - Current",
+                challengeRateCurrentLabel: "Challenge Rate (%) - Current",
+                authApprovedCurrentLabel: "Approved Authorization Rate (%) - Current",
+                fraudCurrentLabel: "Fraud Rate (bps) - Current",
+                disputesCurrentLabel: "Dispute/Chargeback Rate (%) - Current",
+                projectedInputsTitle: "Projected Inputs (Post-Optimization)",
+                authSuccessNewLabel: "Successful Authentication Rate (ASR) (%) - New",
+                challengeRateNewLabel: "Challenge Rate (%) - New",
+                authApprovedNewLabel: "Approved Authorization Rate (%) - New",
+                fraudNewLabel: "Fraud Rate (bps) - New",
+                disputesNewLabel: "Dispute/Chargeback Rate (%) - New",
+                financialValuesTitle: "Financial Values",
+                avgRevenuePerTxLabel: "Avg. Revenue per Approved Transaction (USD)",
+                avgFraudDisputeCostLabel: "Avg. Cost per Fraud or Dispute (USD)",
+                avgChallengeCostLabel: "Avg. Cost per Challenge (USD)",
+                estimatedInvestmentLabel: "Estimated Service Investment (USD/Year)",
+                avgTicketLabel: "Average Ticket (USD)",
+                interchangeFeePercentLabel: "Interchange Fee (%) of Average Ticket",
+                eligibleTxInterchangeLabel: "% of Transactions Eligible for Interchange",
+                calculateButton: "Calculate ROI",
+                resultsTitle: "Optimization Results",
+                totalGainAnnualLabel: "Estimated Total Gain (Annual):",
+                roiTotalLabel: "Total ROI:",
+                roiExplanation: "Net Return on Investment: (Gains - Investment) / Investment * 100",
+                paybackLabel: "Payback:",
+                interchangeRevenueAnnualLabel: "Incremental Interchange Fee Revenue (Annual):",
+                operationalSavingsAnnualLabel: "Annual Operational Savings:",
+                metricsComparisonTitle: "Metrics Comparison (Before vs. After)",
+                authApprovedMetricLabel: "Approved Authorization",
+                fraudMetricLabel: "Fraud",
+                challengeRateMetricLabel: "Challenge Rate",
+                disputesMetricLabel: "Disputes/Chargebacks",
+                downloadButton: "Download",
+                alertMessage: "Please fill in all fields with valid numeric values."
+            },
+            es: {
+                calcTitle: "Calculadora de ROI VelocityGain",
+                mainTitle: "Calculadora de ROI VelocityGain",
+                pageDescription: "¡Descubra el potencial de otimização de sus operaciones! Esta calculadora interactiva está diseñada para bancos emisores que buscan maximizar el rendimiento de la autenticação, autorización y prevención de fraude. Vea claramente cómo las pequeñas mejoras se traducen en ganancias financieras sustanciales y un retorno de la inversión acelerado.",
+                subtitle: "Complete los campos para estimar el retorno de su inversión en otimização.",
+                clientDataTitle: "Datos del Cliente",
+                clientNameLabel: "Nombre del Cliente",
+                countryLabel: "País",
+                contactLabel: "Contato",
+                currentInputsTitle: "Entradas Actuales",
+                volumeTransacoesLabel: "Volumen de Transacciones/Mes",
+                authSuccessCurrentLabel: "Tasa de Autenticación Exitosa (ASR) (%) - Actual",
+                challengeRateCurrentLabel: "Tasa de Desafío (%) - Actual",
+                authApprovedCurrentLabel: "Tasa de Autorización Aprobada (%) - Actual",
+                fraudCurrentLabel: "Tasa de Fraude (bps) - Actual",
+                disputasCurrentLabel: "Tasa de Disputas/Chargebacks (%) - Actual",
+                projectedInputsTitle: "Entradas Proyectadas (Post-Optimización)",
+                authSuccessNewLabel: "Tasa de Autenticación Exitosa (ASR) (%) - Nueva",
+                challengeRateNewLabel: "Tasa de Desafío (%) - Nueva",
+                authApprovedNewLabel: "Tasa de Autorização Aprobada (%) - Nueva",
+                fraudNewLabel: "Tasa de Fraude (bps) - Nueva",
+                disputasNewLabel: "Tasa de Disputas/Chargebacks (%) - Nueva",
+                financialValuesTitle: "Valores Financieros",
+                avgRevenuePerTxLabel: "Ingresos Promedio por Transacción Aprobada (USD)",
+                avgFraudDisputeCostLabel: "Costo Promedio por Fraude o Disputa (USD)",
+                avgChallengeCostLabel: "Costo Promedio por Desafío (USD)",
+                estimatedInvestmentLabel: "Inversión Estimada en el Servicio (USD/Año)",
+                avgTicketLabel: "Ticket Promedio (USD)",
+                interchangeFeePercentLabel: "Interchange Fee (%) del Ticket Promedio",
+                eligibleTxInterchangeLabel: "% de Transacciones Elegibles para Interchange",
+                calculateButton: "Calcular ROI",
+                resultsTitle: "Resultados de la Otimização",
+                totalGainAnnualLabel: "Ganancia Total Estimada (Anual):",
+                roiTotalLabel: "ROI Total:",
+                roiExplanation: "Retorno Neto de la Inversión: (Ganhos - Inversión) / Inversión * 100",
+                paybackLabel: "Recuperación de la Inversión:",
+                interchangeRevenueAnnualLabel: "Ingresos Incrementales por Interchange Fee (Anual):",
+                operationalSavingsAnnualLabel: "Ahorro Operacional Anual:",
+                metricsComparisonTitle: "Comparación de Métricas (Antes vs. Después)",
+                authApprovedMetricLabel: "Autorização Aprobada",
+                fraudMetricLabel: "Fraude",
+                challengeRateMetricLabel: "Tasa de Desafío",
+                disputasMetricLabel: "Disputas/Chargebacks",
+                downloadButton: "Download",
+                alertMessage: "Por favor, complete todos los campos com valores numéricos válidos."
+            }
+        };
+
+        let currentLang = 'pt'; // Idioma padrão
+
+        // Função para atualizar o texto da UI
+        function updateText() {
+            document.querySelectorAll('[data-key]').forEach(element => {
+                const key = element.getAttribute('data-key');
+                if (translations[currentLang][key]) {
+                    element.textContent = translations[currentLang][key];
+                }
+            });
+            // Atualiza o título da página
+            document.title = translations[currentLang].calcTitle;
+            // Atualiza o placeholder do payback se necessário
+            const paybackElement = document.getElementById('payback');
+            if (paybackElement && paybackElement.textContent === 'N/A') {
+                paybackElement.textContent = translations[currentLang].paybackLabel === 'Payback:' ? 'N/A' : (currentLang === 'en' ? 'N/A' : (currentLang === 'es' ? 'N/D' : 'N/A'));
+            }
+            // Atualiza o ano do copyright
+            document.getElementById('currentYear').textContent = new Date().getFullYear();
+        }
+
+        // Event Listeners para os botões de idioma
+        document.querySelectorAll('.lang-btn').forEach(button => {
+            button.addEventListener('click', (event) => {
+                currentLang = event.target.dataset.lang;
+                updateText();
+                calculateROI(); // Recalcula para atualizar as formatações monetárias/percentuais se necessário
+            });
+        });
+
+        document.getElementById('calculateBtn').addEventListener('click', calculateROI);
+        document.getElementById('printBtn').addEventListener('click', () => {
+            console.log("Botão de download clicado! Acionando window.print()...");
+            try {
+                window.print();
+            } catch (error) {
+                console.error("Erro ao tentar imprimir/baixar:", error);
+                alert("Não foi possível iniciar a impressão/download. Por favor, verifique as configurações do seu navegador ou tente novamente.");
+            }
+        });
+
+        function calculateROI() {
+            // Coleta de inputs
+            const volumeTransacoes = parseFloat(document.getElementById('volumeTransacoes').value);
+            const autenticacaoSucessoAtual = parseFloat(document.getElementById('autenticacaoSucessoAtual').value);
+            const autenticacaoSucessoNova = parseFloat(document.getElementById('autenticacaoSucessoNova').value);
+            const challengeRateAtual = parseFloat(document.getElementById('challengeRateAtual').value);
+            const challengeRateNova = parseFloat(document.getElementById('challengeRateNova').value);
+            const autorizacaoAprovadaAtual = parseFloat(document.getElementById('autorizacaoAprovadaAtual').value);
+            const autorizacaoAprovadaNova = parseFloat(document.getElementById('autorizacaoAprovadaNova').value);
+            const fraudeAtual = parseFloat(document.getElementById('fraudeAtual').value); // Em BPS
+            const fraudeNova = parseFloat(document.getElementById('fraudeNova').value); // Em BPS
+            const disputasAtual = parseFloat(document.getElementById('disputasAtual').value);
+            const disputasNova = parseFloat(document.getElementById('disputasNova').value);
+            const receitaMediaTransacao = parseFloat(document.getElementById('receitaMediaTransacao').value);
+            const custoMedioFraudeDisputa = parseFloat(document.getElementById('custoMedioFraudeDisputa').value);
+            const custoMedioChallenge = parseFloat(document.getElementById('custoMedioChallenge').value);
+            const investimentoEstimado = parseFloat(document.getElementById('investimentoEstimado').value);
+            const ticketMedio = parseFloat(document.getElementById('ticketMedio').value);
+            const interchangeFeePercentual = parseFloat(document.getElementById('interchangeFeePercentual').value);
+            const transacoesElegiveisInterchange = parseFloat(document.getElementById('transacoesElegiveisInterchange').value);
+
+            // Validação básica dos inputs
+            if (isNaN(volumeTransacoes) || isNaN(autenticacaoSucessoAtual) || isNaN(autenticacaoSucessoNova) ||
+                isNaN(challengeRateAtual) || isNaN(challengeRateNova) || isNaN(autorizacaoAprovadaAtual) ||
+                isNaN(autorizacaoAprovadaNova) || isNaN(fraudeAtual) || isNaN(fraudeNova) ||
+                isNaN(disputasAtual) || isNaN(disputasNova) || isNaN(receitaMediaTransacao) ||
+                isNaN(custoMedioFraudeDisputa) || isNaN(custoMedioChallenge) || isNaN(investimentoEstimado) ||
+                isNaN(ticketMedio) || isNaN(interchangeFeePercentual) || isNaN(transacoesElegiveisInterchange)) {
+                alert(translations[currentLang].alertMessage);
+                return;
+            }
+
+            // Converter BPS para porcentagem para cálculos
+            const fraudeAtualPercent = fraudeAtual / 100;
+            const fraudeNovaPercent = fraudeNova / 100;
+
+            // Cálculos intermediários (mensais)
+            const deltaAutorizacao = (autorizacaoAprovadaNova - autorizacaoAprovadaAtual) / 100;
+            const ganhoReceitaAutorizacaoMensal = volumeTransacoes * deltaAutorizacao * receitaMediaTransacao;
+
+            const deltaFraude = (fraudeAtualPercent - fraudeNovaPercent); // Já em percentual
+            const economiaFraudeMensal = volumeTransacoes * deltaFraude * custoMedioFraudeDisputa;
+
+            const deltaChallenge = (challengeRateAtual - challengeRateNova) / 100;
+            const economiaChallengeMensal = volumeTransacoes * deltaChallenge * custoMedioChallenge;
+
+            const deltaDisputas = (disputasAtual - disputasNova) / 100;
+            const economiaDisputasMensal = volumeTransacoes * deltaDisputas * custoMedioFraudeDisputa;
+
+            // Cálculo da Receita Incremental por Interchange Fee
+            const interchangeFeePorTransacao = ticketMedio * (interchangeFeePercentual / 100);
+            const deltaAutorizacaoInterchange = (autorizacaoAprovadaNova - autorizacaoAprovadaAtual) / 100;
+            const receitaInterchangeMensal = volumeTransacoes * deltaAutorizacaoInterchange * interchangeFeePorTransacao * (transacoesElegiveisInterchange / 100);
+
+            // Total de ganhos mensais e anuais
+            const totalGanhosMensal = ganhoReceitaAutorizacaoMensal + economiaFraudeMensal + economiaChallengeMensal + economiaDisputasMensal + receitaInterchangeMensal;
+            const totalGanhosAnual = totalGanhosMensal * 12;
+
+            // Economia operacional anual (soma da economia de challenge e disputas)
+            const economiaOperacionalAnual = (economiaChallengeMensal + economiaDisputasMensal) * 12;
+
+            // Cálculo do ROI e Payback
+            let roiTotal = 0;
+            if (investimentoEstimado > 0) {
+                roiTotal = ((totalGanhosAnual - investimentoEstimado) / investimentoEstimado) * 100;
+            } else if (totalGanhosAnual > 0) {
+                roiTotal = Infinity; // Ganhos sem investimento
+            }
+
+            let payback = 'N/A';
+            if (totalGanhosMensal > 0) {
+                payback = (investimentoEstimado / totalGanhosMensal).toFixed(1);
+            } else if (investimentoEstimado <= 0) {
+                payback = 'Imediato'; // Investimento zero ou negativo com ganhos
+            }
+
+
+            // Exibição dos resultados
+            document.getElementById('ganhoTotalAnual').textContent = formatCurrency(totalGanhosAnual, currentLang);
+            document.getElementById('roiTotal').textContent = formatPercentage(roiTotal);
+            document.getElementById('payback').textContent = payback !== 'N/A' && payback !== 'Imediato' ? `${payback} ${translations[currentLang].paybackLabel.includes('meses') || translations[currentLang].paybackLabel.includes('months') || translations[currentLang].paybackLabel.includes('meses') ? translations[currentLang].paybackLabel.split(' ')[1] : 'meses'}` : (payback === 'Imediato' ? (currentLang === 'en' ? 'Immediate' : (currentLang === 'es' ? 'Inmediato' : 'Imediato')) : (currentLang === 'en' ? 'N/A' : (currentLang === 'es' ? 'N/D' : 'N/A')));
+            document.getElementById('receitaInterchangeAnual').textContent = formatCurrency(receitaInterchangeMensal * 12, currentLang);
+            document.getElementById('economiaOperacionalAnual').textContent = formatCurrency(economiaOperacionalAnual, currentLang);
+
+            // Comparativos
+            document.getElementById('autorizacaoAprovadaAntes').textContent = autorizacaoAprovadaAtual.toFixed(2);
+            document.getElementById('autorizacaoAprovadaDepois').textContent = autorizacaoAprovadaNova.toFixed(2);
+            document.getElementById('fraudeAntes').textContent = fraudeAtual.toFixed(0); // Exibe em BPS
+            document.getElementById('fraudeDepois').textContent = fraudeNova.toFixed(0); // Exibe em BPS
+            document.getElementById('challengeRateAntes').textContent = challengeRateAtual.toFixed(2);
+            document.getElementById('challengeRateDepois').textContent = challengeRateNova.toFixed(2);
+            document.getElementById('disputasAntes').textContent = disputasAtual.toFixed(2);
+            document.getElementById('disputasDepois').textContent = disputasNova.toFixed(2);
+
+            document.getElementById('results').classList.remove('hidden');
+        }
+
+        // Funções de formatação
+        function formatCurrency(value, lang) {
+            let locale = 'pt-BR';
+            let currency = 'BRL';
+            if (lang === 'en') {
+                locale = 'en-US';
+                currency = 'USD';
+            } else if (lang === 'es') {
+                locale = 'es-ES'; // Ou 'es-MX' para pesos mexicanos, 'es-AR' para pesos argentinos, etc.
+                currency = 'USD'; // Padronizando para USD conforme solicitado
+            }
+            return new Intl.NumberFormat(locale, { style: 'currency', currency: currency }).format(value);
+        }
+
+        function formatPercentage(value) {
+            if (value === Infinity) {
+                return currentLang === 'en' ? 'Infinite' : (currentLang === 'es' ? 'Infinito' : 'Infinito');
+            }
+            return `${value.toFixed(2)}%`;
+        }
+
+        // Inicializa a calculadora com valores padrão ao carregar a página
+        window.onload = function() {
+            updateText(); // Garante que o idioma padrão seja aplicado
+            calculateROI();
+        };
+    </script>
+</body>
+</html>
