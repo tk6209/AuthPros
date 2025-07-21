@@ -65,11 +65,8 @@
 </head>
 <body class="p-4 sm:p-6 lg:p-8 flex items-center justify-center min-h-screen">
     <div class="bg-white p-6 sm:p-8 rounded-xl shadow-2xl w-full max-w-5xl border border-gray-100 container">
-        <!-- Top Header: VT Vinicius Teixeira e Botões de Idioma -->
-        <div class="flex flex-col sm:flex-row justify-between items-center mb-8">
-            <div class="text-xl sm:text-2xl font-extrabold text-[#1e88e5] mb-4 sm:mb-0">
-                VT Vinicius Teixeira
-            </div>
+        <!-- Top Header: Apenas Botões de Idioma (VT Vinicius Teixeira removido) -->
+        <div class="flex flex-col sm:flex-row justify-end items-center mb-8">
             <div class="flex space-x-2 no-print">
                 <button class="lang-btn px-4 py-2 text-sm rounded-lg bg-[#e3f2fd] text-[#1e88e5] font-semibold hover:bg-blue-200 transition duration-200" data-lang="pt">PT</button>
                 <button class="lang-btn px-4 py-2 text-sm rounded-lg bg-[#e3f2fd] text-[#1e88e5] font-semibold hover:bg-blue-200 transition duration-200" data-lang="en">EN</button>
@@ -80,7 +77,7 @@
         <!-- Nova Seção: Logo AuthPro + Título Principal + Descrição da Página -->
         <div class="flex flex-col md:flex-row items-start md:items-center gap-6 mb-8">
             <!-- Logo AuthPro (substitua 'images/authpro-logo.png' pelo caminho real no seu GitHub) -->
-            <img src="images/1753094321791.jpeg" alt="Logo AuthPro" class="h-20 md:h-24 opacity-90 flex-shrink-0 mx-auto md:mx-0">
+            <img src="images/1753094321790.png" alt="Logo AuthPro" class="h-16 md:h-20 opacity-90 flex-shrink-0 mx-auto md:mx-0">
             <div class="flex-grow text-left">
                 <h1 class="text-3xl sm:text-4xl font-bold text-[#1e88e5] mb-4" data-key="mainTitle">Calculadora de ROI AuthPro</h1>
                 <p class="text-gray-700 text-lg mb-6" data-key="pageDescription">
@@ -255,19 +252,19 @@
             </div>
         </div>
 
-        <button id="printBtn" class="w-full mt-8 bg-[#0d47a1] hover:bg-[#002171] text-white font-bold py-4 px-6 rounded-lg shadow-lg transition duration-300 ease-in-out transform hover:scale-105 focus:outline-none focus:ring-2 focus:ring-[#0d47a1] focus:ring-opacity-50 no-print text-lg">
+        <button id="printBtn" class="w-full mt-8 bg-[#1e88e5] hover:bg-[#1565c0] text-white font-bold py-4 px-6 rounded-lg shadow-lg transition duration-300 ease-in-out transform hover:scale-105 focus:outline-none focus:ring-2 focus:ring-[#1e88e5] focus:ring-opacity-50 no-print text-lg">
             <span data-key="downloadButton">Download</span>
         </button>
 
         <!-- Sua logo pessoal VT Vinicius Teixeira acima do copyright -->
         <div class="flex justify-center items-center mt-8 mb-2 no-print">
             <!-- Certifique-se de que 'images/1753094321792.jpeg' é o caminho correto no seu repositório GitHub -->
-            <img src="images/1753094321792.jpeg" alt="Logo VT Vinicius Teixeira" class="h-20 opacity-90">
+            <img src="images/1753094321791.jpeg" alt="Logo VT Vinicius Teixeira" class="h-24 opacity-90">
         </div>
 
         <!-- Copyright no Rodapé -->
-        <div class="text-center text-gray-500 text-sm no-print">
-            &copy; <span id="currentYear"></span> VT Vinicius Teixeira
+        <div class="text-center text-gray-500 text-xs no-print">
+            &copy; <span id="currentYear"></span> VT - Vinicius Teixeira
         </div>
     </div>
 
@@ -400,7 +397,7 @@
                 resultsTitle: "Resultados de la Otimização",
                 totalGainAnnualLabel: "Ganancia Total Estimada (Anual):",
                 roiTotalLabel: "ROI Total:",
-                roiExplanation: "Retorno Neto de la Inversión: (Ganhos - Inversión) / Inversión * 100",
+                roiExplanation: "Retorno Neto de la Inversão: (Ganhos - Investimento) / Investimento * 100",
                 paybackLabel: "Recuperación de la Inversión:",
                 interchangeRevenueAnnualLabel: "Ingresos Incrementales por Interchange Fee (Anual):",
                 operationalSavingsAnnualLabel: "Ahorro Operacional Anual:",
@@ -445,6 +442,7 @@
         });
 
         document.getElementById('calculateBtn').addEventListener('click', calculateROI);
+        // O botão de download agora usa as mesmas cores do botão de calcular
         document.getElementById('printBtn').addEventListener('click', () => {
             console.log("Botão de download clicado! Acionando window.print()...");
             try {
