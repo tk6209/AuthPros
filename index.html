@@ -68,8 +68,8 @@
         <!-- Header com Branding e Botões de Idioma -->
         <div class="flex flex-col sm:flex-row justify-between items-center mb-8">
             <div class="flex items-center space-x-3 mb-4 sm:mb-0">
-                <!-- Logo AuthPro no canto superior esquerdo -->
-                <img src="files/uploaded:ChatGPT Image 21 de jul. de 2025, 08_00_23.jpg-737fc0cf-b0a6-411d-b661-5d8d67051c95" alt="Logo AuthPro" class="h-8 opacity-90">
+                <!-- Logo AuthPro no canto superior esquerdo (substitua 'images/authpro-logo.png' pelo caminho real no seu GitHub) -->
+                <img src="images/authpro-logo.png" alt="Logo AuthPro" class="h-8 opacity-90">
                 <span class="text-xl sm:text-2xl font-extrabold text-[#1e88e5]">
                     VT Vinicius Teixeira
                 </span>
@@ -256,11 +256,15 @@
             <span data-key="downloadButton">Download</span>
         </button>
 
-        <!-- Copyright e Logo no Rodapé -->
-        <div class="flex flex-col sm:flex-row justify-center items-center text-gray-500 text-sm mt-8 space-y-2 sm:space-y-0 sm:space-x-4">
-            <span>&copy; <span id="currentYear"></span> VT Vinicius Teixeira</span>
-            <!-- Sua logo pessoal VT Vinicius Teixeira adicionada aqui -->
-            <img src="images/1753094321792.jpeg" alt="AuthsPro logo" class="h-10 opacity-90">
+        <!-- Sua logo pessoal VT Vinicius Teixeira acima do copyright -->
+        <div class="flex justify-center items-center mt-8 mb-2 no-print">
+            <!-- Certifique-se de que 'images/1753094321792.jpeg' é o caminho correto no seu repositório GitHub -->
+            <img src="images/1753094321792.jpeg" alt="AuthsPro logo" class="h-20 opacity-90">
+        </div>
+
+        <!-- Copyright no Rodapé -->
+        <div class="text-center text-gray-500 text-sm no-print">
+            &copy; <span id="currentYear"></span> VT Vinicius Teixeira
         </div>
     </div>
 
@@ -269,7 +273,7 @@
         const translations = {
             pt: {
                 calcTitle: "AuthsPro Calculadora de ROI",
-                mainTitle: "AuthsPro Calculadora de ROI",
+                mainTitle: "Calculadora de ROI AuthsPro",
                 pageDescription: "Descubra o potencial de otimização das suas operações! Esta calculadora interativa foi desenvolvida para bancos emissores que buscam maximizar a performance de autenticação, autorização e prevenção à fraude. Veja claramente como pequenas melhorias se traduzem em ganhos financeiros substanciais e um retorno sobre investimento acelerado.",
                 subtitle: "Preencha os campos para estimar o retorno do seu investimento em otimização.",
                 clientDataTitle: "Dados do Cliente",
@@ -286,9 +290,9 @@
                 projectedInputsTitle: "Entradas Projetadas (Pós-Otimização)",
                 authSuccessNewLabel: "Taxa de Autenticação Bem-Sucedida (ASR) (%) - Nova",
                 challengeRateNewLabel: "Challenge Rate (%) - Nova",
-                authApprovedNewLabel: "Tasa de Autorização Aprovada (%) - Nova",
-                fraudNewLabel: "Tasa de Fraude (bps) - Nova",
-                disputasNewLabel: "Tasa de Disputas/Chargebacks (%) - Nova",
+                authApprovedNewLabel: "Taxa de Autorização Aprovada (%) - Nova",
+                fraudNewLabel: "Taxa de Fraude (bps) - Nova",
+                disputasNewLabel: "Taxa de Disputas/Chargebacks (%) - Nova",
                 financialValuesTitle: "Valores Financeiros",
                 avgRevenuePerTxLabel: "Receita Média por Transação Aprovada (R$)",
                 avgFraudDisputeCostLabel: "Custo Médio por Fraude ou Disputa (R$)",
@@ -334,7 +338,7 @@
                 challengeRateNewLabel: "Challenge Rate (%) - New",
                 authApprovedNewLabel: "Approved Authorization Rate (%) - New",
                 fraudNewLabel: "Fraud Rate (bps) - New",
-                disputesNewLabel: "Dispute/Chargeback Rate (%) - New",
+                disputasNewLabel: "Dispute/Chargeback Rate (%) - New",
                 financialValuesTitle: "Financial Values",
                 avgRevenuePerTxLabel: "Avg. Revenue per Approved Transaction (USD)",
                 avgFraudDisputeCostLabel: "Avg. Cost per Fraud or Dispute (USD)",
@@ -365,7 +369,7 @@
                 pageDescription: "¡Descubra el potencial de otimização de sus operaciones! Esta calculadora interactiva está diseñada para bancos emisores que buscan maximizar el rendimiento de la autenticação, autorización y prevención de fraude. Vea claramente cómo las pequeñas mejoras se traducen en ganancias financieras sustanciales y un retorno de la inversión acelerado.",
                 subtitle: "Complete los campos para estimar el retorno de su inversión en otimização.",
                 clientDataTitle: "Datos del Cliente",
-                clientNameLabel: "Nombre del Cliente",
+                clientNameLabel: "Nome do Cliente",
                 countryLabel: "País",
                 contactLabel: "Contato",
                 currentInputsTitle: "Entradas Actuales",
@@ -393,7 +397,7 @@
                 resultsTitle: "Resultados de la Otimização",
                 totalGainAnnualLabel: "Ganancia Total Estimada (Anual):",
                 roiTotalLabel: "ROI Total:",
-                roiExplanation: "Retorno Neto de la Inversión: (Ganhos - Inversión) / Inversión * 100",
+                roiExplanation: "Retorno Neto de la Inversión: (Ganhos - Investimento) / Investimento * 100",
                 paybackLabel: "Recuperación de la Inversión:",
                 interchangeRevenueAnnualLabel: "Ingresos Incrementales por Interchange Fee (Anual):",
                 operationalSavingsAnnualLabel: "Ahorro Operacional Anual:",
