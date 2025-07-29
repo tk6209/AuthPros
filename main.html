@@ -13,6 +13,7 @@
             background-color: #f0f2f5;
             color: #333;
             line-height: 1.6;
+            text-align: justify; /* Alinha todo o texto do corpo justificado */
         }
         .container {
             max-width: 960px;
@@ -28,10 +29,10 @@
             display: flex;
             flex-direction: column;
             align-items: center;
-            text-align: center;
+            text-align: center; /* Mantém o cabeçalho centralizado */
         }
         .header img {
-            max-width: 200px;
+            max-width: 200px; /* Tamanho médio para o logo */
             height: auto;
             margin-bottom: 1rem;
             border-radius: 8px;
@@ -45,13 +46,14 @@
         .header p {
             font-size: 1.1rem;
             color: #555;
+            text-align: justify; /* Garante que o parágrafo do cabeçalho seja justificado */
         }
         .section-title {
             font-size: 2rem;
             font-weight: 600;
             color: #333;
             margin-bottom: 1.5rem;
-            text-align: center;
+            text-align: center; /* Mantém os títulos das seções centralizados */
         }
         .card {
             background-color: #ffffff;
@@ -74,25 +76,26 @@
             font-weight: 600;
             color: #007bff;
             margin-bottom: 0.75rem;
+            text-align: center; /* Mantém os títulos dos cards centralizados */
         }
         .card p {
             color: #666;
             margin-bottom: 1rem;
             flex-grow: 1; /* Allow description to take available space */
+            text-align: justify; /* Garante que os parágrafos dos cards sejam justificados */
         }
         .card a {
-            display: inline-block;
-            background-color: #007bff;
-            color: #ffffff;
-            padding: 0.75rem 1.25rem;
-            border-radius: 8px;
-            text-decoration: none;
-            font-weight: 600;
-            transition: background-color 0.2s ease-in-out;
-            align-self: flex-start; /* Align button to the start of the card */
+            display: block; /* Make it a block element to take full width and allow text-align */
+            color: #007bff; /* Link color */
+            text-decoration: none; /* No underline by default */
+            font-weight: 400; /* Regular weight for a link */
+            transition: color 0.2s ease-in-out, text-decoration 0.2s ease-in-out;
+            text-align: left; /* Align text to the left within its block */
+            margin-top: 0.5rem; /* Small margin from the description */
         }
         .card a:hover {
-            background-color: #0056b3;
+            color: #0056b3; /* Darker blue on hover */
+            text-decoration: underline; /* Underline on hover */
         }
         .grid-container {
             display: grid;
@@ -105,6 +108,9 @@
             color: #777;
             font-size: 0.9rem;
             margin-top: 2rem;
+        }
+        .footer p {
+            text-align: center; /* Centraliza o parágrafo do rodapé */
         }
 
         /* Loading spinner styles */
@@ -124,13 +130,22 @@
             100% { transform: rotate(360deg); }
         }
 
+        .language-buttons {
+            display: flex;
+            justify-content: flex-end; /* Align to the right */
+            padding: 1rem 2rem; /* Add some padding */
+            gap: 0.75rem; /* Space between buttons */
+        }
+
         .language-buttons button {
             background-color: #e2e8f0;
             color: #4a5568;
-            padding: 0.5rem 1rem;
+            padding: 0.5rem 0.75rem; /* Smaller padding for compact look */
             border-radius: 8px;
             font-weight: 600;
             transition: background-color 0.2s ease-in-out, color 0.2s ease-in-out;
+            min-width: 40px; /* Ensure buttons have a minimum width */
+            text-align: center;
         }
         .language-buttons button:hover {
             background-color: #cbd5e0;
@@ -162,66 +177,30 @@
             border-color: #007bff; /* Blue border on focus */
             box-shadow: 0 0 0 3px rgba(0, 123, 255, 0.25); /* Blue glow on focus */
         }
+
+        /* Increased margin-top for content section */
+        .content-section {
+            margin-top: 4rem; /* Aumenta o espaço entre a barra de pesquisa e esta seção */
+        }
     </style>
 </head>
 <body>
+    <!-- Botões de Tradução movidos para o topo -->
+    <div class="language-buttons">
+        <button id="lang-pt" class="active">PT</button>
+        <button id="lang-en">EN</button>
+        <button id="lang-es">ES</button>
+    </div>
+
     <div class="container">
         <!-- Cabeçalho da Página -->
         <header class="header">
-            <img src="images/1753094321790.jpeg" alt="Logo AuthPro" class="h-32 md:h-36 opacity-90 flex-shrink-0 mx-auto md:mx-0">
             <h1 id="header-title">AuthPros: Maximize aprovações, minimize fraudes.</h1>
+             <img src="images/1753094321790.jpeg" alt="Logo AuthPro" class="h-32 md:h-36 opacity-90 flex-shrink-0 mx-auto md:mx-0">
             <p id="header-subtitle">Sua fonte de inteligência contínua e insights preditivos para otimização de pagamentos e prevenção de fraudes.</p>
         </header>
 
-        <!-- Botões de Tradução -->
-        <div class="language-buttons flex justify-center space-x-4 mb-8">
-            <button id="lang-pt" class="active">Português</button>
-            <button id="lang-en">English</button>
-            <button id="lang-es">Español</button>
-        </div>
-
-        <!-- Seção de Conteúdo -->
-        <section class="content-section">
-            <h2 class="section-title" id="content-section-title">Nosso Conteúdo</h2>
-            <div class="grid-container">
-                <!-- Card para Empresa AuthPros -->
-                <div class="card">
-                    <h2 class="card-title">Empresa AuthPros</h2>
-                    <p class="card-description">Conheça mais sobre a AuthPros, nossos serviços e como ajudamos a transformar a performance de autorização em vantagem competitiva.</p>
-                    <a href="https://github.com/tk6209#:~:text=Loading-,AuthsPro,-Public" target="_blank">Veja mais</a>
-                </div>
-
-                <!-- Card para Dados Enriquecidos no Ecommerce -->
-                <div class="card">
-                    <h2 class="card-title">Dados Enriquecidos no Ecommerce</h2>
-                    <p class="card-description">Explore como a utilização de dados enriquecidos pode otimizar as transações e reduzir fraudes no ambiente de e-commerce.</p>
-                    <a href="https://github.com/tk6209/ecommenricheddata" target="_blank">Veja mais</a>
-                </div>
-
-                <!-- Card para Brasil: Normativo 31 Abecs -->
-                <div class="card">
-                    <h2 class="card-title">Brasil: Normativo 31 ABECS</h2>
-                    <p class="card-description">Entenda o Normativo 31 da ABECS e suas implicações para o mercado de pagamentos no Brasil.</p>
-                    <a href="https://github.com/tk6209/Norm31ABECS" target="_blank">Veja mais</a>
-                </div>
-
-                <!-- Card para Sobre Mim -->
-                <div class="card">
-                    <h2 class="card-title">Sobre Mim - Vini Teixeira</h2>
-                    <p class="card-description">Saiba mais sobre a trajetória profissional e a experiência de Vini Teixeira, fundador da AuthPros.</p>
-                    <a href="https://github.com/tk6209/viniteixeira" target="_blank">Veja mais</a>
-                </div>
-
-                <!-- Card para Meu Livro Confiança Invisível -->
-                <div class="card">
-                    <h2 class="card-title">Meu Livro: Confiança Invisível</h2>
-                    <p class="card-description">Descubra os princípios e insights do livro "Confiança Invisível", focado em segurança e confiança no mundo digital.</p>
-                    <a href="https://github.com/tk6209/confiancainvisivel" target="_blank">Veja mais</a>
-                </div>
-            </div>
-        </section>
-
-        <!-- Seção: Pergunte ao Gemini -->
+        <!-- Seção: Pergunte ao Gemini (movida para cá) -->
         <section class="gemini-query mt-8 p-6 bg-white rounded-xl shadow-md">
             <h2 class="section-title" id="gemini-section-title">Pergunte ao Gemini</h2>
             <p class="text-center text-gray-600 mb-4" id="gemini-subtitle">Digite sua pergunta ou cole um link de conteúdo para consultar.</p>
@@ -239,6 +218,47 @@
             <div id="errorMessage" class="mt-4 p-3 bg-red-100 border border-red-400 text-red-700 rounded-lg hidden"></div>
         </section>
 
+        <!-- Seção de Conteúdo -->
+        <section class="content-section">
+            <h2 class="section-title" id="content-section-title">Nosso Conteúdo</h2>
+            <div class="grid-container">
+                <!-- Card para Empresa AuthPros -->
+                <div class="card">
+                    <h2 class="card-title">Empresa AuthPros</h2>
+                    <p class="card-description">Conheça mais sobre a AuthPros, nossos serviços e como ajudamos a transformar a performance de autorização em vantagem competitiva.</p>
+                    <a href="https://tk6209.github.io/AuthPros/main.html" target="_blank">Veja mais...</a>
+                </div>
+
+                <!-- Card para Dados Enriquecidos no Ecommerce -->
+                <div class="card">
+                    <h2 class="card-title">Dados Enriquecidos no Ecommerce</h2>
+                    <p class="card-description">Explore como a utilização de dados enriquecidos pode otimizar as transações e reduzir fraudes no ambiente de e-commerce.</p>
+                    <a href="https://tk6209.github.io/ecommenricheddata/summary.html" target="_blank">Veja mais...</a>
+                </div>
+
+                <!-- Card para Brasil: Normativo 31 Abecs -->
+                <div class="card">
+                    <h2 class="card-title">Brasil: Normativo 31 ABECS</h2>
+                    <p class="card-description">Entenda o Normativo 31 da ABECS e suas implicações para o mercado de pagamentos no Brasil.</p>
+                    <a href="https://tk6209.github.io/abecsnorm31/framework.html" target="_blank">Veja mais...</a>
+                </div>
+
+                <!-- Card para Sobre Mim -->
+                <div class="card">
+                    <h2 class="card-title">Sobre Mim - Vini Teixeira</h2>
+                    <p class="card-description">Saiba mais sobre a trajetória profissional e a experiência de Vini Teixeira, fundador da AuthPros.</p>
+                    <a href="https://tk6209.github.io/viniciusteixeira/index.html" target="_blank">Veja mais...</a>
+                </div>
+
+                <!-- Card para Meu Livro Confiança Invisível -->
+                <div class="card">
+                    <h2 class="card-title">Meu Livro: Confiança Invisível</h2>
+                    <p class="card-description">Descubra os princípios e insights do livro "Confiança Invisível", focado em segurança e confiança no mundo digital.</p>
+                    <a href="https://tk6209.github.io/confiancainvisivel/book.html" target="_blank">Veja mais...</a>
+                </div>
+            </div>
+        </section>
+
         <!-- Rodapé -->
         <footer class="footer">
             <p id="footer-text">&copy; 2024 AuthPros. Todos os direitos reservados.</p>
@@ -252,8 +272,8 @@
                 { id: 'header-title', element: document.getElementById('header-title'), original: '' },
                 { id: 'header-subtitle', element: document.getElementById('header-subtitle'), original: '' },
                 { id: 'content-section-title', element: document.getElementById('content-section-title'), original: '' },
-                { id: 'gemini-section-title', element: document.getElementById('gemini-section-title'), original: '' }, // Updated ID
-                { id: 'gemini-subtitle', element: document.getElementById('gemini-subtitle'), original: '' }, // Updated ID
+                { id: 'gemini-section-title', element: document.getElementById('gemini-section-title'), original: '' },
+                { id: 'gemini-subtitle', element: document.getElementById('gemini-subtitle'), original: '' },
                 { id: 'summary-output-title', element: document.getElementById('summary-output-title'), original: '' },
                 { id: 'footer-text', element: document.getElementById('footer-text'), original: '' },
                 { id: 'summarizeButton', element: document.getElementById('summarizeButton'), original: '' },
@@ -261,7 +281,8 @@
                 // Card titles and descriptions
                 ...Array.from(document.querySelectorAll('.card-title')).map((el, index) => ({ id: `card-title-${index}`, element: el, original: '' })),
                 ...Array.from(document.querySelectorAll('.card-description')).map((el, index) => ({ id: `card-description-${index}`, element: el, original: '' })),
-                ...Array.from(document.querySelectorAll('.card a')).map((el, index) => ({ id: `card-button-${index}`, element: el, original: '' }))
+                ...Array.from(document.querySelectorAll('.card a')).map((el, index) => ({ id: `card-button-${index}`, element: el, original: '' })),
+                // Language buttons themselves are not translated, their content is fixed
             ];
 
             // Populate original content on page load
@@ -423,3 +444,4 @@
     </script>
 </body>
 </html>
+
