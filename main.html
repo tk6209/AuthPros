@@ -4,7 +4,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>AuthPros - Maximizando performance e reduzindo fraude</title>
-    <meta name="description" content="AuthPros, Mais aprovações e menos fraude"> <!-- Meta descrição adicionada aqui -->
+    <meta name="description" content="AuthPros, Mais aprovações e menos fraude">
     <script src="https://cdn.tailwindcss.com"></script>
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700&display=swap" rel="stylesheet">
     <!-- Estilos CSS para replicar em outras páginas -->
@@ -52,13 +52,13 @@
             width: auto;
             opacity: 0.9;
             flex-shrink: 0;
-            transition: filter 0.3s ease-in-out; /* Adiciona transição para o filtro */
+            /* Removido transition: filter para que a logo não mude de cor */
         }
 
-        /* Aplica o filtro para tornar a logo branca quando a barra está rolada */
-        .fixed-navbar.scrolled-nav img {
-            filter: brightness(0) invert(1); /* Tenta transformar a logo escura em branca */
-        }
+        /* Removido o filtro para que a logo não mude de cor ao rolar */
+        /* .fixed-navbar.scrolled-nav img {
+            filter: brightness(0) invert(1);
+        } */
 
         .fixed-navbar-links {
             display: flex;
@@ -251,6 +251,21 @@
             flex-grow: 1;
             text-align: justify;
         }
+        /* New style for "Saiba mais..." links in cards */
+        .card .card-read-more {
+            display: block; /* Make it a block element to take full width and allow text-align */
+            color: #007bff; /* Link color */
+            text-decoration: none; /* No underline by default */
+            font-weight: 400; /* Regular weight for a link */
+            transition: color 0.2s ease-in-out, text-decoration 0.2s ease-in-out;
+            text-align: left; /* Align text to the left within its block */
+            margin-top: 0.5rem; /* Small margin from the description */
+        }
+        .card .card-read-more:hover {
+            color: #0056b3; /* Darker blue on hover */
+            text-decoration: underline; /* Underline on hover */
+        }
+
         .grid-container {
             display: grid;
             grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
@@ -321,7 +336,7 @@
         <div class="flex items-center">
             <div class="fixed-navbar-links hidden md:flex"> <!-- Links visíveis apenas em telas médias/grandes -->
                 <a href="https://tk6209.github.io/AuthPros/main.html" target="_blank" id="nav-link-empresa">Empresa AuthPros</a>
-                <a href="https://tk6209.github.io/enricheddata/summary.html" target="_blank" id="nav-link-dados">Dados Enriquecidos</a>
+                <a href="https://tk6209.github.io/enricheddata/details.html" target="_blank" id="nav-link-dados">Dados Enriquecidos</a>
 
                 <!-- Dropdown News (agora à esquerda) -->
                 <div class="dropdown">
@@ -356,7 +371,6 @@
     <div class="container">
         <!-- Main Header (Hero Section) -->
         <header class="header">
-            <!-- Logo removida deste cabeçalho -->
             <div class="header-text flex flex-col items-center"> <!-- Centraliza o conteúdo do texto -->
                 <h1 id="header-title">AuthPros: Maximize aprovações, minimize fraudes.</h1>
                 <p id="header-subtitle">Sua fonte de inteligência contínua e insights preditivos para otimização de pagamentos e prevenção de fraudes.</p>
@@ -389,42 +403,49 @@
                 <div class="card">
                     <h2 class="card-title">Empresa AuthPros</h2>
                     <p class="card-description">Conheça mais sobre a AuthPros, nossos serviços e como ajudamos a transformar a performance de autorização em vantagem competitiva.</p>
+                    <a href="https://tk6209.github.io/AuthPros/main.html" target="_blank" class="card-read-more">Saiba mais...</a>
                 </div>
 
                 <!-- Card para Dados Enriquecidos no Ecommerce -->
                 <div class="card">
                     <h2 class="card-title">Dados Enriquecidos no Ecommerce</h2>
                     <p class="card-description">Explore como a utilização de dados enriquecidos pode otimizar as transações e reduzir fraudes no ambiente de e-commerce.</p>
+                    <a href="https://tk6209.github.io/enricheddata/details.html" target="_blank" class="card-read-more">Saiba mais...</a>
                 </div>
 
                 <!-- Card para Brasil: Normativo 31 Abecs -->
                 <div class="card">
                     <h2 class="card-title">Brasil: Normativo 31 ABECS</h2>
                     <p class="card-description">Entenda o Normativo 31 da ABECS e suas implicações para o mercado de pagamentos no Brasil.</p>
+                    <a href="https://tk6209.github.io/abecsnorm31/framework.html" target="_blank" class="card-read-more">Saiba mais...</a>
                 </div>
 
-                <!-- Card para Sobre Mim -->
+                <!-- Card para Sobre Nós -->
                 <div class="card">
                     <h2 class="card-title">Sobre Nós</h2>
                     <p class="card-description">Saiba mais sobre a trajetória profissional e a experiência de Vini Teixeira, fundador da AuthPros.</p>
+                    <a href="https://tk6209.github.io/viniciusteixeira/index.html" target="_blank" class="card-read-more">Saiba mais...</a>
                 </div>
 
                 <!-- Card para Livro: Confiança Invisível -->
                 <div class="card">
                     <h2 class="card-title">Livro: Confiança Invisível</h2>
                     <p class="card-description">Descubra os princípios e insights do livro "Confiança Invisível", focado em segurança e confiança no mundo digital.</p>
+                    <a href="https://tk6209.github.io/confiancainvisivel/book.html" target="_blank" class="card-read-more">Saiba mais...</a>
                 </div>
 
                 <!-- Card para Livro: Pagamentos para Leigos -->
                 <div class="card">
                     <h2 class="card-title">Livro: Pagamentos para Leigos</h2>
                     <p class="card-description">Aprenda os fundamentos do mundo dos pagamentos de forma simples e acessível.</p>
+                    <a href="https://tk6209.github.io/paymentsfordummies/book.html" target="_blank" class="card-read-more">Saiba mais...</a>
                 </div>
 
                 <!-- Card para EMVCo Users Meeting 2025 -->
                 <div class="card">
                     <h2 class="card-title">EMVCo Users Meeting 2025</h2>
                     <p class="card-description">Fique por dentro das últimas novidades e discussões do encontro de usuários da EMVCo de 2025.</p>
+                    <a href="https://tk6209.github.io/emvconews/2025usermeeting.html" target="_blank" class="card-read-more">Saiba mais...</a>
                 </div>
             </div>
         </section>
@@ -448,7 +469,7 @@
                 { id: 'footer-text', element: document.getElementById('footer-text'), original: '' },
                 { id: 'summarizeButton', element: document.getElementById('summarizeButton'), original: '' },
                 { id: 'contentToSummarize', element: document.getElementById('contentToSummarize'), original: '' }, // Input placeholder
-                // New navigation links
+                // Navigation links
                 { id: 'nav-link-empresa', element: document.getElementById('nav-link-empresa'), original: '' },
                 { id: 'nav-link-dados', element: document.getElementById('nav-link-dados'), original: '' },
                 { id: 'nav-link-livros-main', element: document.getElementById('nav-link-livros-main'), original: '' }, // Main "Livros" link
@@ -461,6 +482,8 @@
                 // Card titles and descriptions
                 ...Array.from(document.querySelectorAll('.card-title')).map((el, index) => ({ id: `card-title-${index}`, element: el, original: '' })),
                 ...Array.from(document.querySelectorAll('.card-description')).map((el, index) => ({ id: `card-description-${index}`, element: el, original: '' })),
+                // New card read more links
+                ...Array.from(document.querySelectorAll('.card-read-more')).map((el, index) => ({ id: `card-read-more-${index}`, element: el, original: '' })),
             ];
 
             // Populate original content on page load
