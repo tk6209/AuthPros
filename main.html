@@ -1,0 +1,425 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>AuthPros - Conteúdo Consolidado</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700&display=swap" rel="stylesheet">
+    <!-- Estilos CSS para replicar em outras páginas -->
+    <style>
+        body {
+            font-family: 'Inter', sans-serif;
+            background-color: #f0f2f5;
+            color: #333;
+            line-height: 1.6;
+        }
+        .container {
+            max-width: 960px;
+            margin: 0 auto;
+            padding: 2rem;
+        }
+        .header {
+            background-color: #ffffff;
+            padding: 1.5rem;
+            border-radius: 12px;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+            margin-bottom: 2rem;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            text-align: center;
+        }
+        .header img {
+            max-width: 200px;
+            height: auto;
+            margin-bottom: 1rem;
+            border-radius: 8px;
+        }
+        .header h1 {
+            font-size: 2.5rem;
+            font-weight: 700;
+            color: #007bff;
+            margin-bottom: 0.5rem;
+        }
+        .header p {
+            font-size: 1.1rem;
+            color: #555;
+        }
+        .section-title {
+            font-size: 2rem;
+            font-weight: 600;
+            color: #333;
+            margin-bottom: 1.5rem;
+            text-align: center;
+        }
+        .card {
+            background-color: #ffffff;
+            padding: 1.5rem;
+            border-radius: 12px;
+            box-shadow: 0 2px 4px rgba(0, 0, 0, 0.08);
+            margin-bottom: 1.5rem;
+            transition: transform 0.2s ease-in-out, box-shadow 0.2s ease-in-out;
+            display: flex;
+            flex-direction: column;
+            justify-content: space-between;
+            height: 100%; /* Ensure cards in a row have similar height */
+        }
+        .card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 6px 12px rgba(0, 0, 0, 0.15);
+        }
+        .card h2 {
+            font-size: 1.5rem;
+            font-weight: 600;
+            color: #007bff;
+            margin-bottom: 0.75rem;
+        }
+        .card p {
+            color: #666;
+            margin-bottom: 1rem;
+            flex-grow: 1; /* Allow description to take available space */
+        }
+        .card a {
+            display: inline-block;
+            background-color: #007bff;
+            color: #ffffff;
+            padding: 0.75rem 1.25rem;
+            border-radius: 8px;
+            text-decoration: none;
+            font-weight: 600;
+            transition: background-color 0.2s ease-in-out;
+            align-self: flex-start; /* Align button to the start of the card */
+        }
+        .card a:hover {
+            background-color: #0056b3;
+        }
+        .grid-container {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 1.5rem;
+        }
+        .footer {
+            text-align: center;
+            padding: 2rem;
+            color: #777;
+            font-size: 0.9rem;
+            margin-top: 2rem;
+        }
+
+        /* Loading spinner styles */
+        .loader {
+            border: 4px solid #f3f3f3; /* Light grey */
+            border-top: 4px solid #007bff; /* Blue */
+            border-radius: 50%;
+            width: 20px;
+            height: 20px;
+            animation: spin 1s linear infinite;
+            display: none; /* Hidden by default */
+            margin-left: 10px;
+        }
+
+        @keyframes spin {
+            0% { transform: rotate(0deg); }
+            100% { transform: rotate(360deg); }
+        }
+
+        .language-buttons button {
+            background-color: #e2e8f0;
+            color: #4a5568;
+            padding: 0.5rem 1rem;
+            border-radius: 8px;
+            font-weight: 600;
+            transition: background-color 0.2s ease-in-out, color 0.2s ease-in-out;
+        }
+        .language-buttons button:hover {
+            background-color: #cbd5e0;
+        }
+        .language-buttons button.active {
+            background-color: #007bff;
+            color: #ffffff;
+        }
+
+        /* Styles for the new search-like input */
+        .search-input-container {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            flex-wrap: wrap; /* Allow wrapping on small screens */
+            gap: 1rem; /* Space between input and button */
+        }
+        .search-input {
+            width: 100%;
+            max-width: 500px; /* Max width for the input field */
+            padding: 0.75rem 1.5rem; /* Increased padding for better look */
+            border: 1px solid #cbd5e0; /* Light border */
+            border-radius: 9999px; /* Fully rounded */
+            box-shadow: 0 1px 3px rgba(0, 0, 0, 0.1); /* Subtle shadow */
+            transition: all 0.2s ease-in-out;
+        }
+        .search-input:focus {
+            outline: none;
+            border-color: #007bff; /* Blue border on focus */
+            box-shadow: 0 0 0 3px rgba(0, 123, 255, 0.25); /* Blue glow on focus */
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <!-- Cabeçalho da Página -->
+        <header class="header">
+            <img src="https://placehold.co/200x80/007bff/ffffff?text=AuthPros+Logo" alt="AuthPros Logo">
+            <h1 id="header-title">AuthPros: Maximize aprovações, minimize fraudes.</h1>
+            <p id="header-subtitle">Sua fonte de inteligência contínua e insights preditivos para otimização de pagamentos e prevenção de fraudes.</p>
+        </header>
+
+        <!-- Botões de Tradução -->
+        <div class="language-buttons flex justify-center space-x-4 mb-8">
+            <button id="lang-pt" class="active">Português</button>
+            <button id="lang-en">English</button>
+            <button id="lang-es">Español</button>
+        </div>
+
+        <!-- Seção de Conteúdo -->
+        <section class="content-section">
+            <h2 class="section-title" id="content-section-title">Nosso Conteúdo</h2>
+            <div class="grid-container">
+                <!-- Card para Empresa AuthPros -->
+                <div class="card">
+                    <h2 class="card-title">Empresa AuthPros</h2>
+                    <p class="card-description">Conheça mais sobre a AuthPros, nossos serviços e como ajudamos a transformar a performance de autorização em vantagem competitiva.</p>
+                    <a href="https://github.com/tk6209#:~:text=Loading-,AuthsPro,-Public" target="_blank">Veja mais</a>
+                </div>
+
+                <!-- Card para Dados Enriquecidos no Ecommerce -->
+                <div class="card">
+                    <h2 class="card-title">Dados Enriquecidos no Ecommerce</h2>
+                    <p class="card-description">Explore como a utilização de dados enriquecidos pode otimizar as transações e reduzir fraudes no ambiente de e-commerce.</p>
+                    <a href="https://github.com/tk6209/ecommenricheddata" target="_blank">Veja mais</a>
+                </div>
+
+                <!-- Card para Brasil: Normativo 31 Abecs -->
+                <div class="card">
+                    <h2 class="card-title">Brasil: Normativo 31 ABECS</h2>
+                    <p class="card-description">Entenda o Normativo 31 da ABECS e suas implicações para o mercado de pagamentos no Brasil.</p>
+                    <a href="https://github.com/tk6209/Norm31ABECS" target="_blank">Veja mais</a>
+                </div>
+
+                <!-- Card para Sobre Mim -->
+                <div class="card">
+                    <h2 class="card-title">Sobre Mim - Vini Teixeira</h2>
+                    <p class="card-description">Saiba mais sobre a trajetória profissional e a experiência de Vini Teixeira, fundador da AuthPros.</p>
+                    <a href="https://github.com/tk6209/viniteixeira" target="_blank">Veja mais</a>
+                </div>
+
+                <!-- Card para Meu Livro Confiança Invisível -->
+                <div class="card">
+                    <h2 class="card-title">Meu Livro: Confiança Invisível</h2>
+                    <p class="card-description">Descubra os princípios e insights do livro "Confiança Invisível", focado em segurança e confiança no mundo digital.</p>
+                    <a href="https://github.com/tk6209/confiancainvisivel" target="_blank">Veja mais</a>
+                </div>
+            </div>
+        </section>
+
+        <!-- Seção: Pergunte ao Gemini -->
+        <section class="gemini-query mt-8 p-6 bg-white rounded-xl shadow-md">
+            <h2 class="section-title" id="gemini-section-title">Pergunte ao Gemini</h2>
+            <p class="text-center text-gray-600 mb-4" id="gemini-subtitle">Digite sua pergunta ou cole um link de conteúdo para consultar.</p>
+            <div class="search-input-container">
+                <input type="text" id="contentToSummarize" class="search-input" placeholder="Digite sua pergunta ou cole um link aqui...">
+                <button id="summarizeButton" class="bg-blue-600 hover:bg-blue-700 text-white font-bold py-2 px-6 rounded-full shadow-lg transition-all duration-300 ease-in-out transform hover:scale-105 flex items-center justify-center">
+                    Consultar
+                    <div id="loader" class="loader"></div>
+                </button>
+            </div>
+            <div id="summaryOutput" class="mt-6 p-4 bg-gray-50 border border-gray-200 rounded-lg text-gray-800 hidden">
+                <h3 class="font-semibold text-lg mb-2" id="summary-output-title">Resposta:</h3>
+                <p id="summaryText"></p>
+            </div>
+            <div id="errorMessage" class="mt-4 p-3 bg-red-100 border border-red-400 text-red-700 rounded-lg hidden"></div>
+        </section>
+
+        <!-- Rodapé -->
+        <footer class="footer">
+            <p id="footer-text">&copy; 2024 AuthPros. Todos os direitos reservados.</p>
+        </footer>
+    </div>
+
+    <script>
+        document.addEventListener('DOMContentLoaded', () => {
+            // Store original text content of translatable elements
+            const translatableElements = [
+                { id: 'header-title', element: document.getElementById('header-title'), original: '' },
+                { id: 'header-subtitle', element: document.getElementById('header-subtitle'), original: '' },
+                { id: 'content-section-title', element: document.getElementById('content-section-title'), original: '' },
+                { id: 'gemini-section-title', element: document.getElementById('gemini-section-title'), original: '' }, // Updated ID
+                { id: 'gemini-subtitle', element: document.getElementById('gemini-subtitle'), original: '' }, // Updated ID
+                { id: 'summary-output-title', element: document.getElementById('summary-output-title'), original: '' },
+                { id: 'footer-text', element: document.getElementById('footer-text'), original: '' },
+                { id: 'summarizeButton', element: document.getElementById('summarizeButton'), original: '' },
+                { id: 'contentToSummarize', element: document.getElementById('contentToSummarize'), original: '' }, // Input placeholder
+                // Card titles and descriptions
+                ...Array.from(document.querySelectorAll('.card-title')).map((el, index) => ({ id: `card-title-${index}`, element: el, original: '' })),
+                ...Array.from(document.querySelectorAll('.card-description')).map((el, index) => ({ id: `card-description-${index}`, element: el, original: '' })),
+                ...Array.from(document.querySelectorAll('.card a')).map((el, index) => ({ id: `card-button-${index}`, element: el, original: '' }))
+            ];
+
+            // Populate original content on page load
+            translatableElements.forEach(item => {
+                if (item.element) {
+                    // For input placeholder, get the placeholder attribute
+                    if (item.element.tagName === 'INPUT' && item.element.hasAttribute('placeholder')) {
+                        item.original = item.element.getAttribute('placeholder').trim();
+                    } else {
+                        item.original = item.element.textContent.trim();
+                    }
+                }
+            });
+
+            // Function to translate the entire page content
+            async function translatePage(targetLanguage) {
+                const currentActiveButton = document.querySelector('.language-buttons button.active');
+                if (currentActiveButton) {
+                    currentActiveButton.classList.remove('active');
+                }
+                const targetButton = document.getElementById(`lang-${targetLanguage.toLowerCase()}`);
+                if (targetButton) {
+                    targetButton.classList.add('active');
+                }
+
+                const textsToTranslate = translatableElements.map(item => item.original);
+
+                // Show loader if needed for translation, or disable buttons
+                const langButtons = document.querySelectorAll('.language-buttons button');
+                langButtons.forEach(button => button.disabled = true);
+
+                try {
+                    const prompt = `Translate the following array of Portuguese texts to ${targetLanguage}. Return the translation as a JSON array of strings, maintaining the original order.
+                    Example:
+                    Input: ["Olá", "Mundo"]
+                    Output: ["Hello", "World"]
+
+                    Texts to translate: ${JSON.stringify(textsToTranslate)}`;
+
+                    let chatHistory = [];
+                    chatHistory.push({ role: "user", parts: [{ text: prompt }] });
+
+                    const payload = {
+                        contents: chatHistory,
+                        generationConfig: {
+                            responseMimeType: "application/json",
+                            responseSchema: {
+                                type: "ARRAY",
+                                items: { "type": "STRING" }
+                            }
+                        }
+                    };
+                    const apiKey = "";
+                    const apiUrl = `https://generativelanguage.googleapis.com/v1beta/models/gemini-2.0-flash:generateContent?key=${apiKey}`;
+
+                    const response = await fetch(apiUrl, {
+                        method: 'POST',
+                        headers: { 'Content-Type': 'application/json' },
+                        body: JSON.stringify(payload)
+                    });
+
+                    if (!response.ok) {
+                        const errorData = await response.json();
+                        throw new Error(`API Error: ${errorData.error.message || response.statusText}`);
+                    }
+
+                    const result = await response.json();
+                    const translatedJson = result.candidates[0].content.parts[0].text;
+                    const translatedTexts = JSON.parse(translatedJson);
+
+                    // Update text content of elements
+                    translatableElements.forEach((item, index) => {
+                        if (item.element && translatedTexts[index] !== undefined) {
+                            // For input placeholder, set the placeholder attribute
+                            if (item.element.tagName === 'INPUT' && item.element.hasAttribute('placeholder')) {
+                                item.element.setAttribute('placeholder', translatedTexts[index]);
+                            } else {
+                                item.element.textContent = translatedTexts[index];
+                            }
+                        }
+                    });
+
+                } catch (error) {
+                    console.error('Error calling Gemini API for translation:', error);
+                    // Optionally display an error message for translation
+                } finally {
+                    langButtons.forEach(button => button.disabled = false);
+                }
+            }
+
+            // Event Listeners for language buttons
+            document.getElementById('lang-pt').addEventListener('click', () => translatePage('Portuguese'));
+            document.getElementById('lang-en').addEventListener('click', () => translatePage('English'));
+            document.getElementById('lang-es').addEventListener('click', () => translatePage('Spanish'));
+
+
+            // Gemini Query functionality
+            document.getElementById('summarizeButton').addEventListener('click', async () => {
+                const queryContent = document.getElementById('contentToSummarize').value;
+                const summaryOutput = document.getElementById('summaryOutput');
+                const summaryText = document.getElementById('summaryText');
+                const errorMessage = document.getElementById('errorMessage');
+                const loader = document.getElementById('loader');
+
+                summaryOutput.classList.add('hidden');
+                errorMessage.classList.add('hidden');
+                summaryText.textContent = '';
+                loader.style.display = 'inline-block'; // Show loader
+
+                if (!queryContent.trim()) {
+                    errorMessage.textContent = 'Por favor, digite sua pergunta ou cole um link para consultar.';
+                    errorMessage.classList.remove('hidden');
+                    loader.style.display = 'none'; // Hide loader
+                    return;
+                }
+
+                try {
+                    // The prompt is now a general query to Gemini
+                    const prompt = `Responda à seguinte consulta de forma concisa e clara. Se for um link, resuma o conteúdo do link. Se for uma pergunta, responda-a: ${queryContent}`;
+
+                    let chatHistory = [];
+                    chatHistory.push({ role: "user", parts: [{ text: prompt }] });
+
+                    const payload = { contents: chatHistory };
+                    const apiKey = "";
+                    const apiUrl = `https://generativelanguage.googleapis.com/v1beta/models/gemini-2.0-flash:generateContent?key=${apiKey}`;
+
+                    const response = await fetch(apiUrl, {
+                        method: 'POST',
+                        headers: { 'Content-Type': 'application/json' },
+                        body: JSON.stringify(payload)
+                    });
+
+                    if (!response.ok) {
+                        const errorData = await response.json();
+                        throw new Error(`Erro da API: ${errorData.error.message || response.statusText}`);
+                    }
+
+                    const result = await response.json();
+
+                    if (result.candidates && result.candidates.length > 0 &&
+                        result.candidates[0].content && result.candidates[0].content.parts &&
+                        result.candidates[0].content.parts.length > 0) {
+                        const text = result.candidates[0].content.parts[0].text;
+                        summaryText.textContent = text;
+                        summaryOutput.classList.remove('hidden');
+                    } else {
+                        errorMessage.textContent = 'Não foi possível obter uma resposta. Tente novamente.';
+                        errorMessage.classList.remove('hidden');
+                    }
+                } catch (error) {
+                    console.error('Erro ao chamar a API Gemini:', error);
+                    errorMessage.textContent = `Ocorreu um erro: ${error.message}. Por favor, tente novamente.`;
+                } finally {
+                    loader.style.display = 'none'; // Hide loader
+                }
+            });
+        });
+    </script>
+</body>
+</html>
