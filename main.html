@@ -52,6 +52,12 @@
             width: auto;
             opacity: 0.9;
             flex-shrink: 0;
+            transition: filter 0.3s ease-in-out; /* Adiciona transição para o filtro */
+        }
+
+        /* Aplica o filtro para tornar a logo branca quando a barra está rolada */
+        .fixed-navbar.scrolled-nav img {
+            filter: brightness(0) invert(1); /* Tenta transformar a logo escura em branca */
         }
 
         .fixed-navbar-links {
@@ -590,7 +596,7 @@
 
                     if (!response.ok) {
                         const errorData = await response.json();
-                        throw new Error(`Erro da API: ${errorData.error.message || response.statusText}`);
+                        throw new Error(`API Error: ${errorData.error.message || response.statusText}`);
                     }
 
                     const result = await response.json();
